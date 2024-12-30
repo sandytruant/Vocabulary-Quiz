@@ -2,7 +2,7 @@ let vocabulary = [];
 
 // 从外部 JSON 文件加载词库
 function loadVocabulary() {
-    return fetch('vocabulary3.json')
+    return fetch('vocabulary5.json')
         .then(response => response.json())
         .then(data => {
             vocabulary = data;
