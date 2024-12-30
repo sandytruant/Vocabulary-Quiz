@@ -25,17 +25,46 @@
             margin-top: 20px;
             font-weight: bold;
         }
+        .vocabulary-selector {
+            margin-bottom: 20px;
+        }
+        .vocabulary-selector label {
+            margin: 0 10px;
+            cursor: pointer;
+        }
+        #startQuiz {
+            margin: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        #quizContainer {
+            display: none;
+        }
     </style>
 </head>
 <body>
-
     <h1>Vocabulary Quiz</h1>
-    <div class="question" id="question">Loading...</div>
-    <ul class="options" id="options">
-        <!-- Options will be inserted here -->
-    </ul>
-    <div class="feedback" id="feedback"></div>
+    
+    <div class="vocabulary-selector">
+        <h3>选择词库：</h3>
+        <label><input type="radio" name="vocab" value="1"> 词库 1</label>
+        <label><input type="radio" name="vocab" value="2"> 词库 2</label>
+        <label><input type="radio" name="vocab" value="3"> 词库 3</label>
+        <label><input type="radio" name="vocab" value="4"> 词库 4</label>
+        <label><input type="radio" name="vocab" value="5"> 词库 5</label>
+        <br>
+        <button id="startQuiz">开始测试</button>
+    </div>
 
-    <script src="main.js"></script>
+    <div id="quizContainer">
+        <div class="question" id="question">Loading...</div>
+        <ul class="options" id="options">
+            <!-- Options will be inserted here -->
+        </ul>
+        <div class="feedback" id="feedback"></div>
+    </div>
+
+    <script src="renderer.js"></script>
 </body>
 </html>

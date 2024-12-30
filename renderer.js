@@ -1,14 +1,28 @@
 let vocabulary = [];
 
-// 从外部 JSON 文件加载词库
-function loadVocabulary() {
-    return fetch('vocabulary5.json')
+// 加载选定的词库
+function loadVocabulary(vocabNumber) {
+    return fetch(`vocabulary${vocabNumber}.json`)
         .then(response => response.json())
         .then(data => {
             vocabulary = data;
-            updateQuestion(); // 数据加载后，开始出题
+            updateQuestion();
+            document.getElementById('quizContainer').style.display = 'block';
         })
         .catch(error => console.error('Error loading vocabulary:', error));
+}
+
+// 初始化页面
+function initializePage() {
+    const startButton = document.getElementById('startQuiz');
+    startButton.addEventListener('click', () => {
+        const selectedVocab = document.querySelector('input[name="vocab"]:checked');
+        if (selectedVocab) {
+            loadVocabulary(selectedVocab.value);
+        } else {
+            alert('请选择一个词库！');
+        }
+    });
 }
 
 // 随机获取一个词条
@@ -71,5 +85,5 @@ function checkAnswer(selected, correct) {
     }
 }
 
-// 页面加载时初始化词库
-window.onload = loadVocabulary;
+// 修改页面加载初始化
+window.onload = initializePage;
