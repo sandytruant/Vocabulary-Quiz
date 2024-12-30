@@ -6,15 +6,29 @@ function loadVocabulary(vocabNumber) {
         .then(response => response.json())
         .then(data => {
             vocabulary = data;
-            updateQuestion();
+            // 隐藏选择界面，显示测试界面
+            document.querySelector('.vocabulary-selector').style.display = 'none';
             document.getElementById('quizContainer').style.display = 'block';
+            updateQuestion();
         })
         .catch(error => console.error('Error loading vocabulary:', error));
+}
+
+// 添加返回选择界面的函数
+function backToSelection() {
+    document.querySelector('.vocabulary-selector').style.display = 'block';
+    document.getElementById('quizContainer').style.display = 'none';
+    // 清空之前的选择
+    document.querySelectorAll('input[name="vocab"]').forEach(radio => radio.checked = false);
+    // 清空反馈信息
+    document.getElementById('feedback').textContent = '';
 }
 
 // 初始化页面
 function initializePage() {
     const startButton = document.getElementById('startQuiz');
+    const backButton = document.getElementById('backButton');
+    
     startButton.addEventListener('click', () => {
         const selectedVocab = document.querySelector('input[name="vocab"]:checked');
         if (selectedVocab) {
@@ -23,6 +37,8 @@ function initializePage() {
             alert('请选择一个词库！');
         }
     });
+
+    backButton.addEventListener('click', backToSelection);
 }
 
 // 随机获取一个词条
@@ -53,23 +69,34 @@ function shuffle(array) {
 
 // 更新问题和选项
 function updateQuestion() {
-    if (vocabulary.length === 0) return; // 确保词库非空
+    if (vocabulary.length === 0) return;
 
     const wordObj = getRandomWord();
     const options = getOptions(wordObj.meaning);
 
-    document.getElementById('question').textContent = `What is the meaning of "${wordObj.word}"?`;
+    const questionElement = document.getElementById('question');
+    questionElement.innerHTML = `What is the meaning of "<span class="word">${wordObj.word}</span>"?`;
     
     const optionsList = document.getElementById('options');
-    optionsList.innerHTML = ''; // 清空之前的选项
+    optionsList.innerHTML = '';
     options.forEach(option => {
         const li = document.createElement('li');
         li.textContent = option;
         li.addEventListener('click', () => checkAnswer(option, wordObj.meaning));
+        
+        // 添加鼠标悬停效果的音效（可选）
+        li.addEventListener('mouseenter', () => {
+            li.style.backgroundColor = '#f0f0f0';
+        });
+        
+        li.addEventListener('mouseleave', () => {
+            li.style.backgroundColor = '';
+        });
+        
         optionsList.appendChild(li);
     });
 
-    document.getElementById('feedback').textContent = ''; // 清空反馈
+    document.getElementById('feedback').textContent = '';
 }
 
 // 检查答案

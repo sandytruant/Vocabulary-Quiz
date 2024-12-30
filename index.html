@@ -20,6 +20,17 @@
         }
         .options li {
             margin: 10px 0;
+            padding: 10px 20px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .options li:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
+            transform: scale(1.02);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
         .feedback {
             margin-top: 20px;
@@ -27,19 +38,61 @@
         }
         .vocabulary-selector {
             margin-bottom: 20px;
+            transition: all 0.3s ease;
         }
         .vocabulary-selector label {
-            margin: 0 10px;
-            cursor: pointer;
+            display: inline-block;
+            padding: 8px 15px;
+            margin: 5px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+        .vocabulary-selector label:hover {
+            background-color: #f0f0f0;
+            border-color: #999;
         }
         #startQuiz {
-            margin: 20px;
-            padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 12px 24px;
+            transition: all 0.3s ease;
+        }
+        #startQuiz:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
         }
         #quizContainer {
             display: none;
+        }
+        #question {
+            padding: 15px;
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        #question:hover {
+            background-color: #f0f0f0;
+            transform: scale(1.01);
+        }
+        #backButton {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #666;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        #backButton:hover {
+            background-color: #555;
+            transform: scale(1.05);
         }
     </style>
 </head>
@@ -58,6 +111,7 @@
     </div>
 
     <div id="quizContainer">
+        <button id="backButton">返回主界面</button>
         <div class="question" id="question">Loading...</div>
         <ul class="options" id="options">
             <!-- Options will be inserted here -->
